@@ -8,8 +8,13 @@ import {
   TextInput,
   FlatList
 } from 'react-native';
-import PouchDB from 'pouchdb'
-
+import { Scene, Router } from 'react-native-router-flux'
+import Index from './src'
+import Agregar from './src/Agregar'
+import Mostrar from './src/Mostrar'
+import Eliminar from './src/Eliminar'
+import Editar from './src/EditarLIst'
+console.disableYellowBox = true;
 export default class db extends Component {
   constructor(props) {
     super(props);
@@ -21,33 +26,15 @@ export default class db extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <TextInput
-          style={{width:200}}
-          value={this.state.inputText}
-          onChangeText={(inputText) => {
-            this.setState({inputText})
-          }}
-          placeholder='Text'
-        />
-        <Button style={styles.margin} title='Buscar' />
-        <Button style={styles.margin} title='Eliminar' />
-        <Button style={styles.margin} title='Agregar' />
-        <View>
-          <TextInput
-            style={{width:200}}
-            value={this.state.updateText}
-            onChangeText={(newText) => {
-              this.setState({updateText: newText})
-            }}
-          />
-        </View>
-        <View>
-          <Text>
-            Aqui va una lista
-          </Text>
-        </View>
-      </View>
+      <Router>
+        <Scene key="root" >
+          <Scene key="index" component={Index} />
+          <Scene key="agregar" component={Agregar} />
+          <Scene key="mostrar" component={Mostrar} />
+          <Scene key="eliminar" component={Eliminar} />
+          <Scene key="editar" component={Editar} />
+        </Scene>
+      </Router>
     );
   }
 }
